@@ -35,10 +35,10 @@ class TestHashFunctions(unittest.TestCase):
         N = 20
         self.assertRaises(TypeError, hash_functions.h_rolling(key, N))
 
-    def test_divide_by_random_key_not_string(self):
+    def test_python_key_not_string(self):
         key = 4
         N = 20
-        self.assertRaises(TypeError, hash_functions.h_rolling(key, N))
+        self.assertRaises(TypeError, hash_functions.h_python(key, N))
 
 
 if __name__ == '__main__':

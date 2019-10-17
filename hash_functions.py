@@ -65,9 +65,8 @@ def h_rolling(key, N, p=53, m=2**64):
     return s % N
 
 
-def h_divide_by_random(key, N):
-    """ Hash function using ASCII values of characters divided by a
-    random integer.
+def h_python(key, N):
+    """ Python's built in hash function
 
     Parameters
     ----------
@@ -81,11 +80,4 @@ def h_divide_by_random(key, N):
     An integer corresponding to the position in the hash table the key, value
     will be stored
     """
-
-    s = 0
-    try:
-        for i in range(len(key)):
-            s += int(ord(key[i]) / random.randint(0, 100))
-    except TypeError:
-        print('key for divide by random hash function must be a string')
-    return s % N
+    return hash(key) % N
