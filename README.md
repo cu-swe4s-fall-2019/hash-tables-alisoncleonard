@@ -114,14 +114,14 @@ than the ascii function, while chained hash is faster than linear probing.
 ## How to install project
 
 Before installation:
-    - wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    - bash Miniconda3-latest-Linux-x86_64.sh -b
-    - . /home/travis/miniconda3/etc/profile.d/conda.sh
-    - conda config --add channels r
-    - conda create --yes -n test
-    - conda activate test
-    - conda install --yes python=3.6
-    - conda install -y pycodestyle
+1. $ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+2. $ bash Miniconda3-latest-Linux-x86_64.sh -b
+3. $ . /home/travis/miniconda3/etc/profile.d/conda.sh
+4. $ conda config --add channels r
+5. $ conda create --yes -n test
+6. $ conda activate test
+7. $ conda install --yes python=3.6
+8. $ conda install -y pycodestyle
 
 Access software on [GitHub]
 (https://github.com/cu-swe4s-fall-2019/hash-tables-alisoncleonard)
