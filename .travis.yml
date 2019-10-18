@@ -9,9 +9,9 @@ before_install:
     - conda activate test
     - conda install --yes python=3.6
     - conda install -y pycodestyle
+    - conda install -y matplotlib
 
 script:
-    - python hash_functions.py
     - python test_hash_functions.py
-    - python hash_tables.py
     - python test_hash_tables.py
+    - bash benchmark.sh

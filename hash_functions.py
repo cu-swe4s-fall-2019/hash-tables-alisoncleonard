@@ -2,6 +2,7 @@
 """
 
 import random
+import sys
 
 
 def h_ascii(key, N):
@@ -81,3 +82,40 @@ def h_python(key, N):
     will be stored
     """
     return hash(key) % N
+
+
+def main():
+    """
+    Main function allows calling hash function from the command line.
+
+    Parameters
+    ----------
+    key_file_name - a txt file containing string keys to hash
+
+    hash_function - the hash function to call. Either ascii, rolling, or python
+
+    Returns
+    -------
+    A list of hash slots for each key in key_file
+    """
+
+    key_file = sys.argv[1]
+    hash_alg = sys.argv[2]
+
+    key_list = []
+    f = open(key_file, 'r')
+    for line in f:
+        y = line.split()
+        key_list.append(y)
+
+    for key in key_list:
+        if hash_alg == 'ascii':
+            print(h_ascii(str(key), (len(key_list) + 1)))
+        if hash_alg == 'rolling':
+            print(h_rolling(str(key), (len(key_list) + 1)))
+        if hash_alg == 'python':
+            print(h_python(str(key), (len(key_list) + 1)))
+
+
+if __name__ == '__main__':
+    main()
