@@ -1,8 +1,13 @@
 """Hash_tables.py creates classes containing hash tables using different
-collision resolution strategies
+collision resolution strategies. Main functions tests performance of hash
+functions and collision reduction strategies in hash tables.
 """
 
 import hash_functions
+import argparse
+import time
+import random
+import sys
 
 
 class LinearProbe:
@@ -133,3 +138,92 @@ class ChainedHash:
             if key == k:
                 return v
         return None
+
+def reservoir_sampling(new_val, size, V):
+    if len(V) < size:
+        V.append(new_val)
+    else:
+        j = random.randint(0, len(V))
+        if j < len(V):
+            V[j] = new_val
+
+def main():
+    """
+    use hash table classes to build functional tables. benchmark performance
+    of different hash functions and collision resolution strategies
+    """
+
+    # parser = argparse.ArgumentParser(description='Build hash tables and '
+    #                                  'benchmark performance',
+    #                                  prog='hash_tables.py')
+    #
+    # parser.add_argument(table_size, help='Size of hash table')
+    #
+    # parser.add_argument(hash_alg, help='hash algorithm. '
+    #                     "choose from 'ascii', 'rolling', or 'python' from "
+    #                     'hash_functions.py')
+    #
+    # parser.add_argument(coll_strtgy, help='hash table class'
+    #                     "choose from 'linear' or 'chain' classes")
+    #
+    # parser.add_argument(data_file, help='input data file')
+    #
+    # parser.add_argument(num_keys, help='number of keys to hash')
+    #
+    #
+    # args = parser.parse_args()
+    #
+    # N = int(args.table_size)
+    # hash_alg = args.hash_alg
+    # collision_strategy = args.coll_strtgy
+    # data_file_name = args.data_file
+    # keys_to_add = int(args.num_keys)
+
+    N = int(sys.argv[1])
+    hash_alg = sys.argv[2]
+    collision_strategy = sys.argv[3]
+    data_file_name= sys.argv[4]
+    keys_to_add = int(sys.argv[5])
+
+    ht = None
+
+    if hash_alg == 'ascii':
+
+        if collision_strategy == 'linear':
+            ht = LinearProbe(N, hash_functions.h_ascii)
+        elif collision_strategy == 'chain':
+            ht = ChainedHash(N, hash_functions.h_ascii)
+
+    elif hash_alg == 'rolling':
+
+        if collision_strategy == 'linear':
+            ht = LinearProbe(N, hash_functions.h_rolling)
+        elif collision_strategy == 'chain':
+            ht = ChainedHash(N, hash_functions.h_rolling)
+
+    elif hash_alg == 'python':
+        if collision_strategy == 'linear':
+            ht = LinearProbe(N, hash_functions.h_python)
+        elif collision_strategy == 'chain':
+            ht = ChainedHash(N, hash_functions.h_python)
+
+    keys_to_search = 100
+    V = []
+
+    for l in open(data_file_name):
+        reservoir_sampling(l, keys_to_search, V)
+        t0 = time.time()
+        ht.add(l, l)
+        t1 = time.time()
+        print('add', ht.M/ht.N, t1 - t0)
+        if ht.M == keys_to_add:
+            break
+
+    for v in V:
+        t0 = time.time()
+        r = ht.search(v)
+        t1 = time.time()
+        print('search', t1 - t0)
+
+if __name__ == '__main__':
+    main()
