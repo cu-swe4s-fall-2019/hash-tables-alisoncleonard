@@ -15,3 +15,4 @@ script:
     - python test_hash_functions.py
     - python hash_tables.py
     - python test_hash_tables.py
+    - bash benchmark.sh
