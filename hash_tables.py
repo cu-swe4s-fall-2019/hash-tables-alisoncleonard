@@ -153,37 +153,31 @@ def main():
     of different hash functions and collision resolution strategies
     """
 
-    # parser = argparse.ArgumentParser(description='Build hash tables and '
-    #                                  'benchmark performance',
-    #                                  prog='hash_tables.py')
-    #
-    # parser.add_argument(table_size, help='Size of hash table')
-    #
-    # parser.add_argument(hash_alg, help='hash algorithm. '
-    #                     "choose from 'ascii', 'rolling', or 'python' from "
-    #                     'hash_functions.py')
-    #
-    # parser.add_argument(coll_strtgy, help='hash table class'
-    #                     "choose from 'linear' or 'chain' classes")
-    #
-    # parser.add_argument(data_file, help='input data file')
-    #
-    # parser.add_argument(num_keys, help='number of keys to hash')
-    #
-    #
-    # args = parser.parse_args()
-    #
-    # N = int(args.table_size)
-    # hash_alg = args.hash_alg
-    # collision_strategy = args.coll_strtgy
-    # data_file_name = args.data_file
-    # keys_to_add = int(args.num_keys)
+    parser = argparse.ArgumentParser(description='Build hash tables and '
+                                     'benchmark performance',
+                                     prog='hash_tables.py')
 
-    N = int(sys.argv[1])
-    hash_alg = sys.argv[2]
-    collision_strategy = sys.argv[3]
-    data_file_name= sys.argv[4]
-    keys_to_add = int(sys.argv[5])
+    parser.add_argument('table_size', type=int, help='Size of hash table')
+
+    parser.add_argument('hash_alg', type=str, help='hash algorithm. '
+                        "choose from 'ascii', 'rolling', or 'python' from "
+                        'hash_functions.py')
+
+    parser.add_argument('coll_strtgy', type=str, help='hash table class'
+                        "choose from 'linear' or 'chain' classes")
+
+    parser.add_argument('data_file', help='input data file')
+
+    parser.add_argument('num_keys', type=int, help='number of keys to hash')
+
+
+    args = parser.parse_args()
+
+    N = args.table_size
+    hash_alg = args.hash_alg
+    collision_strategy = args.coll_strtgy
+    data_file_name = args.data_file
+    keys_to_add = args.num_keys
 
     ht = None
 
