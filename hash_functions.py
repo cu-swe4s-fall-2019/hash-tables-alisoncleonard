@@ -2,7 +2,7 @@
 """
 
 import random
-import sys
+import argparse
 
 
 def h_ascii(key, N):
@@ -98,9 +98,20 @@ def main():
     -------
     A list of hash slots for each key in key_file
     """
+    parser = argparse.ArgumentParser(description='Implement hash functions',
+                                     prog='hash_functions.py')
 
-    key_file = sys.argv[1]
-    hash_alg = sys.argv[2]
+    parser.add_argument('key_file_name', type=str, help='txt file containing '
+                        'keys for hash function')
+
+    parser.add_argument('hash_function', type=str, help='hash algorithm. '
+                        "choose from 'ascii', 'rolling', or 'python' from "
+                        'hash_functions.py')
+
+    args = parser.parse_args()
+
+    key_file = args.key_file_name
+    hash_alg = args.hash_function
 
     key_list = []
     f = open(key_file, 'r')
