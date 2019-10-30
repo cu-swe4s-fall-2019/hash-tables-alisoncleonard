@@ -103,6 +103,7 @@ class ChainedHash:
         self.N = N
         self.T = [[] for i in range(N)]
         self.M = 0
+        self.keys = []
 
     def add(self, key, value):
         """Add keys and values to hash table
@@ -116,9 +117,11 @@ class ChainedHash:
         -------
         Adds key, value pair to hash table. Returns True
         """
-        start_hash = self.hash(key, self.N)
-        self.T[start_hash].append((key, value))
-        self.M += 1
+        if self.search(key) == None:
+            start_hash = self.hash(key, self.N)
+            self.T[start_hash].append((key, value))
+            self.M += 1
+            self.keys.append(key.strip('\n'))
         return True
 
     def search(self, key):
@@ -218,6 +221,7 @@ def main():
         r = ht.search(v)
         t1 = time.time()
         print('search', t1 - t0)
+
 
 if __name__ == '__main__':
     main()
